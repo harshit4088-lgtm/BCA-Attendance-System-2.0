@@ -736,15 +736,18 @@ function loadMyAttendance(students) {
 
   } else {
 
-    document.getElementById(
-      "myTodayStatus"
-    ).textContent = "Not Marked";
+  document.getElementById(
+    "myTodayStatus"
+  ).textContent = "Not Marked";
 
-    document.getElementById(
-      "markMyAttendanceBtn"
-    ).disabled = false;
-  }
+  const btn = document.getElementById(
+    "markMyAttendanceBtn"
+  );
 
+  btn.disabled = false;
+  btn.style.pointerEvents = "auto";
+  btn.style.opacity = "1";
+}
   window.currentStudentId = myStudentId;
 }
 
