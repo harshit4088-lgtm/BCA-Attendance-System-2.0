@@ -41,6 +41,7 @@ function getToday() {
 loginForm.addEventListener("submit", async function (event) {
 
   event.preventDefault();
+  console.log("LOGIN BUTTON CLICKED");
 
   const email =
     document.getElementById("email").value.trim();
