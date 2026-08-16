@@ -40,7 +40,6 @@ function getToday() {
 
 loginForm.addEventListener("submit", async function (event) {
   
-  console.log("LOGIN BUTTON CLICKED");
   
   event.preventDefault();
   
@@ -62,7 +61,7 @@ loginForm.addEventListener("submit", async function (event) {
 
   } catch (error) {
 
-    console.error("FIREBASE LOGIN ERROR:", error);
+    console.error(error);
 
     loginMessage.textContent =
       getLoginError(error.code);
