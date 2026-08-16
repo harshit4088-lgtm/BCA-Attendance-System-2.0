@@ -62,7 +62,7 @@ loginForm.addEventListener("submit", async function (event) {
 
   } catch (error) {
 
-    console.error(error);
+    console.error("FIREBASE LOGIN ERROR:", error);
 
     loginMessage.textContent =
       getLoginError(error.code);
