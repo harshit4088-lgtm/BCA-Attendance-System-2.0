@@ -1,1 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#6366f1"
+  >
+
+  <title>Attendance System V2</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+  <!-- =========================
+       LOGIN PAGE
+  ========================== -->
+
+  <div id="loginPage" class="login-page">
+
+    <div class="login-box">
+
+      <div class="logo">
+        📚
+      </div>
+
+      <h1>Attendance System</h1>
+
+      <p class="subtitle">
+        Login to continue
+      </p>
+
+
+      <form id="loginForm">
+
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        >
+
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        >
+
+
+        <button
+          type="submit"
+          class="login-btn"
+        >
+          Login
+        </button>
+
+      </form>
+
+
+      <p
+        id="loginMessage"
+        class="message"
+      ></p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       DASHBOARD
+  ========================== -->
+
+  <div
+    id="dashboard"
+    class="dashboard"
+    style="display: none;"
+  >
+
+    <header class="topbar">
+
+      <div>
+
+        <h1>
+          📚 Attendance System
+        </h1>
+
+        <p id="welcomeText">
+          Welcome
+        </p>
+
+      </div>
+
+
+      <button
+        id="logoutBtn"
+        class="logout-btn"
+      >
+        Logout
+      </button>
+
+    </header>
+
+
+    <main class="container">
+
+
+      <!-- ADMIN DASHBOARD -->
+
+      <section
+        id="adminDashboard"
+        style="display: none;"
+      >
+
+        <div class="page-title">
+
+          <h2>
+            👨‍💼 Admin Dashboard
+          </h2>
+
+          <p>
+            Manage students and attendance
+          </p>
+
+        </div>
+
+
+        <div class="stats">
+
+          <div class="stat-card">
+
+            <span>
+              👨‍🎓
+            </span>
+
+            <h3 id="totalStudents">
+              0
+            </h3>
+
+            <p>
+              Total Students
+            </p>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span>
+              🟢
+            </span>
+
+            <h3 id="presentToday">
+              0
+            </h3>
+
+            <p>
+              Present Today
+            </p>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span>
+              🔴
+            </span>
+
+            <h3 id="absentToday">
+              0
+            </h3>
+
+            <p>
+              Absent Today
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- ADD STUDENT -->
+
+        <div class="card">
+
+          <h3>
+            ➕ Add Student
+          </h3>
+
+
+          <div class="form-grid">
+
+            <div>
+
+              <label for="studentName">
+                Student Name
+              </label>
+
+              <input
+                type="text"
+                id="studentName"
+                placeholder="Student name"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label for="studentEnroll">
+                Enrollment Number
+              </label>
+
+              <input
+                type="text"
+                id="studentEnroll"
+                placeholder="Enrollment number"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label for="studentEmail">
+                Student Email
+              </label>
+
+              <input
+                type="email"
+                id="studentEmail"
+                placeholder="student@example.com"
+              >
+
+            </div>
+
+          </div>
+
+
+          <button
+            id="addStudentBtn"
+            class="primary-btn"
+          >
+            Add Student
+          </button>
+
+        </div>
+
+
+        <!-- ALL STUDENTS -->
+
+        <div class="card">
+
+          <div class="section-header">
+
+            <div>
+
+              <h3>
+                👨‍🎓 All Students
+              </h3>
+
+              <p>
+                View and manage attendance
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Name
+                  </th>
+
+                  <th>
+                    Enrollment
+                  </th>
+
+                  <th>
+                    Today
+                  </th>
+
+                  <th>
+                    Attendance %
+                  </th>
+
+                  <th>
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="adminStudentTable">
+
+                <tr>
+
+                  <td
+                    colspan="5"
+                    class="empty"
+                  >
+                    No students yet.
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- STUDENT DASHBOARD -->
+
+      <section
+        id="studentDashboard"
+        style="display: none;"
+      >
+
+        <div class="page-title">
+
+          <h2>
+            👨‍🎓 Student Dashboard
+          </h2>
+
+          <p>
+            View and mark your attendance
+          </p>
+
+        </div>
+
+
+        <!-- MY ATTENDANCE -->
+
+        <div class="student-overview">
+
+          <div class="card my-attendance">
+
+            <h3>
+              My Attendance
+            </h3>
+
+            <div
+              id="myAttendancePercentage"
+              class="big-percentage"
+            >
+              0%
+            </div>
+
+            <p>
+              Overall Attendance
+            </p>
+
+          </div>
+
+
+          <div class="card today-card">
+
+            <h3>
+              Today's Attendance
+            </h3>
+
+            <div
+              id="myTodayStatus"
+              class="today-status"
+            >
+              Not Marked
+            </div>
+
+
+            <button
+              id="markMyAttendanceBtn"
+              class="present-btn"
+            >
+              🟢 Mark Present
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ALL PERCENTAGES -->
+
+        <div class="card">
+
+          <h3>
+            📊 Student Attendance Preview
+          </h3>
+
+          <p class="muted">
+            You can view everyone's attendance percentage.
+          </p>
+
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Student
+                  </th>
+
+                  <th>
+                    Enrollment
+                  </th>
+
+                  <th>
+                    Attendance %
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="studentPreviewTable">
+
+                <tr>
+
+                  <td
+                    colspan="3"
+                    class="empty"
+                  >
+                    Loading...
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- Firebase SDK -->
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+
+  <!-- Firebase configuration -->
+
+  <script src="firebase-config.js"></script>
+
+
+  <!-- Application -->
+
+  <script src="app.js"></script>
+
+
+</body>
+
+</html>
