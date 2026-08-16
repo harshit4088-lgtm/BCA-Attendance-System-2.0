@@ -674,23 +674,20 @@ function renderStudentPreview(students) {
 function loadMyAttendance(students) {
 
   let myStudent = null;
+  let myStudentId = null;
 
-
-  Object.values(students).forEach(function (student) {
+  Object.entries(students).forEach(function ([id, student]) {
 
     if (
-      student.email &&
-      currentUser.email &&
-      student.email.toLowerCase() ===
-      currentUser.email.toLowerCase()
+      student.uid &&
+      currentUser &&
+      student.uid === currentUser.uid
     ) {
-
       myStudent = student;
-
+      myStudentId = id;
     }
 
   });
-
 
   if (!myStudent) {
 
@@ -703,29 +700,19 @@ function loadMyAttendance(students) {
     ).textContent = "Student record not found.";
 
     return;
-
   }
 
-
   const percentage =
-    calculatePercentage(
-      myStudent.records || {}
-    );
-
+    calculatePercentage(myStudent.records || {});
 
   document.getElementById(
     "myAttendancePercentage"
-  ).textContent =
-    percentage + "%";
+  ).textContent = percentage + "%";
 
-
-  const today =
-    getToday();
-
+  const today = getToday();
 
   const todayStatus =
     (myStudent.records || {})[today];
-
 
   if (todayStatus === "P") {
 
@@ -737,37 +724,30 @@ function loadMyAttendance(students) {
       "markMyAttendanceBtn"
     ).disabled = true;
 
-  }
-
-  else if (todayStatus === "A") {
+  } else if (todayStatus === "A") {
 
     document.getElementById(
       "myTodayStatus"
     ).textContent = "Absent";
 
-  }
+    document.getElementById(
+      "markMyAttendanceBtn"
+    ).disabled = true;
 
-  else {
+  } else {
 
     document.getElementById(
       "myTodayStatus"
     ).textContent = "Not Marked";
 
+    document.getElementById(
+      "markMyAttendanceBtn"
+    ).disabled = false;
   }
 
-
-  window.currentStudentId =
-    Object.keys(students).find(function (id) {
-
-      return (
-        students[id].email &&
-        students[id].email.toLowerCase() ===
-        currentUser.email.toLowerCase()
-      );
-
-    });
-
+  window.currentStudentId = myStudentId;
 }
+
 
 
 // ==========================================
