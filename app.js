@@ -98,8 +98,7 @@ function getLoginError(code) {
       return "Invalid email or password.";
 
     default:
-      return "Login failed. Please try again.";
-
+  return "Firebase error: " + code;
   }
 
 }
