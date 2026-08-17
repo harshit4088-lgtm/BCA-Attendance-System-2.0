@@ -3,6 +3,9 @@
 // APP LOGIC
 // ==========================================
 
+const auth = firebase.auth();
+const db = firebase.database();
+
 const loginPage = document.getElementById("loginPage");
 const dashboard = document.getElementById("dashboard");
 
